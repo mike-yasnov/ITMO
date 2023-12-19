@@ -1,0 +1,96 @@
+@startuml
+interface locations.Locatable {
+~ String getPlace()
+~ void setType(Places)
+~ Places getType()
+}
+class personalities.Skills {
+- String name
+- String info
++ String getName()
++ String getInfo()
+}
+class Main {
++ {static} void main(String[])
+}
+class personalities.Person {
+- List<Skills> skills
+- String name
+- int age
++ {static} void lookAfter(String,String,String)
++ {static} void looseWorld(String,int)
++ {static} void tell(String,String)
++ {static} void notice(String,String)
++ {static} void controlWords(String,String)
++ {static} void drill(String,Location)
++ {static} void notice(String)
++ {static} void scream(String)
++ {static} void feel(String,String)
++ List<Skills> getSkills()
++ void addSkill(Skills)
++ int hashCode()
++ boolean equals(Object)
++ String toString()
++ String getName()
++ int getAge()
+}
+abstract class subjects.Subject {
+- String name
++ String getName()
++ void setName(String)
+}
+class subjects.Newspaper {
+- String info
++ void setInfo(String)
++ void printBulletins()
+}
+class subjects.Phantom {
+- Location location
++ Location getLocation()
++ void hide()
+}
+class subjects.Mountains {
+- Location location
++ void setLocation(Location)
++ void unapproach()
++ void grow()
+}
+class subjects.Wind {
+- int speed
++ int getSpeed()
++ void setSpeed(int)
++ void driveCylinders()
+}
+interface personalities.Humanable {
+~ String getName()
+~ int getAge()
+~ void addSkill(Skills)
+}
+class locations.Location {
+- List<Skills> skills
+- Places type
++ String placeName
++ String typeName
++ void setType(Places)
++ Places getType()
++ String getPlace()
++ List<Skills> getSkills()
++ int hashCode()
++ boolean equals(Object)
++ String toString()
+}
+enum locations.Places {
++  Mountains
++  Airplane
++  Mine
++  AbstractWorld
+}
+
+
+personalities.Humanable <|.. personalities.Person
+subjects.Subject <|-- subjects.Newspaper
+subjects.Subject <|-- subjects.Phantom
+subjects.Subject <|-- subjects.Mountains
+subjects.Subject <|-- subjects.Wind
+locations.Locatable <|.. locations.Location
+@enduml

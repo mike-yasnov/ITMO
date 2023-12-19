@@ -1,0 +1,79 @@
+@startuml
+class subjects.Newspaper {
+}
+class locations.Location {
+- List<Skills> skills
+- Places type
++ String placeName
++ String typeName
++ void setType(Places)
++ Places getType()
++ String getPlace()
++ List<Skills> getSkills()
++ int hashCode()
++ boolean equals(Object)
++ String toString()
+}
+enum locations.Places {
++  Mountains
++  Airplane
++  Mine
++  AbstractWorld
+}
+interface personalities.Humanable {
+~ String getName()
+~ void addSkill(Skills)
+}
+interface locations.Locatable {
+~ String getPlace()
+~ void setType(Places)
+~ Places getType()
+}
+class subjects.Wind {
+- int speed
++ int getSpeed()
++ void setSpeed(int)
+}
+abstract class subjects.Subject {
+- String name
++ String getName()
++ void setName(String)
+}
+class subjects.Phantom {
+- Location location
++ Location getLocation()
++ void hide()
+}
+class main {
+}
+class personalities.Skills {
+- String name
+- String info
++ String getName()
++ String getInfo()
+}
+class personalities.Person {
+- List<Skills> skills
+- String name
+- int age
++ {static} void lookAfter(String,String,String)
++ {static} void looseWorld(String)
++ {static} void tell(String)
++ {static} void notice(String,String,String)
++ {static} void controlWords(String,String,String)
++ {static} void drill(String)
++ List<Skills> getSkills()
++ void addSkill(Skills)
++ int hashCode()
++ boolean equals(Object)
++ String toString()
++ String getName()
+}
+
+
+subjects.Subject <|-- subjects.Newspaper
+locations.Locatable <|.. locations.Location
+subjects.Subject <|-- subjects.Wind
+subjects.Subject <|-- subjects.Phantom
+personalities.Humanable <|.. personalities.Person
+@enduml

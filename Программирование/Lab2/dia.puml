@@ -1,0 +1,86 @@
+@startuml
+class lab2.poke.Espeon {
+}
+class lab2.moves.DoubleSlap {
+# double calcBaseDamage(Pokemon,Pokemon)
+# String describe()
+}
+class lab2.moves.Confide {
+# void applyOppEffects(Pokemon)
+# String describe()
+}
+class lab2.moves.Psychic {
++ void applyOppEffects(Pokemon)
++ String describe()
+}
+class lab2.moves.ShadowBall {
+# void applyOppEffects(Pokemon)
+# String describe()
+}
+class lab2.moves.FocusBlast {
+# void applyOppEffects(Pokemon)
+# String describe()
+}
+class lab2.moves.MudBomb {
+# void applyOppEffects(Pokemon)
+# String describe()
+}
+class lab2.Main {
++ {static} void main(String[])
+}
+class lab2.poke.Poliwhirl {
+}
+class lab2.moves.BabyDollEyes {
+# void applyOppEffects(Pokemon)
+# String describe()
+}
+class lab2.moves.BulkUp {
+# void applyOppEffects(Pokemon)
+# String describe()
+}
+class lab2.moves.Scald {
+# void applyOppEffects(Pokemon)
+# void applyOppDamage(Pokemon,double)
+# String describe()
+}
+class lab2.moves.StoneEdge {
+# double calcCriticalHit(Pokemon,Pokemon)
+# String describe()
+}
+class lab2.moves.Rest {
+# void applySelfEffects(Pokemon)
+# String describe()
+}
+class lab2.poke.Poliwag {
+}
+class lab2.moves.Confusion {
+# void applyOppEffects(Pokemon)
+# String describe()
+}
+class lab2.poke.Eevee {
+}
+class lab2.poke.Poliwrath {
+}
+class lab2.poke.Landorus {
+}
+
+
+lab2.poke.Eevee <|-- lab2.poke.Espeon
+ru.ifmo.se.pokemon.PhysicalMove <|-- lab2.moves.DoubleSlap
+ru.ifmo.se.pokemon.SpecialMove <|-- lab2.moves.Confide
+lab2.moves.SpecialMove <|-- lab2.moves.Psychic
+ru.ifmo.se.pokemon.SpecialMove <|-- lab2.moves.ShadowBall
+ru.ifmo.se.pokemon.SpecialMove <|-- lab2.moves.FocusBlast
+lab2.moves.SpecialMove <|-- lab2.moves.MudBomb
+lab2.poke.Poliwag <|-- lab2.poke.Poliwhirl
+ru.ifmo.se.pokemon.StatusMove <|-- lab2.moves.BabyDollEyes
+ru.ifmo.se.pokemon.StatusMove <|-- lab2.moves.BulkUp
+lab2.moves.SpecialMove <|-- lab2.moves.Scald
+ru.ifmo.se.pokemon.PhysicalMove <|-- lab2.moves.StoneEdge
+ru.ifmo.se.pokemon.StatusMove <|-- lab2.moves.Rest
+ru.ifmo.se.pokemon.Pokemon <|-- lab2.poke.Poliwag
+ru.ifmo.se.pokemon.SpecialMove <|-- lab2.moves.Confusion
+ru.ifmo.se.pokemon.Pokemon <|-- lab2.poke.Eevee
+lab2.poke.Poliwhirl <|-- lab2.poke.Poliwrath
+ru.ifmo.se.pokemon.Pokemon <|-- lab2.poke.Landorus
+@enduml

@@ -1,0 +1,140 @@
+@startuml
+abstract class subjects.Subject {
+- String name
++ String getName()
++ void setName(String)
+}
+class exceptions.InvalidName {
+}
+class subjects.Newspaper {
++ void printBulletins()
+}
+class subjects.Newspaper$Bulletin {
+- String info
++ String getInfo()
+}
+class subjects.Phantom {
+- Location location
++ Location getLocation()
++ void hide()
+}
+class exceptions.InvalidAge {
+}
+class subjects.Mountains {
+- Location location
++ void setLocation(Location)
++ void unapproach()
++ void grow()
+}
+class subjects.Bulletins {
+- String info
++ void setInfo(String)
++ String getInfo()
+}
+class locations.Location {
+- List<Skills> skills
+- Places type
++ String placeName
++ String typeName
++ void setType(Places)
++ Places getType()
++ String getPlace()
++ List<Skills> getSkills()
++ int hashCode()
++ boolean equals(Object)
++ String toString()
+}
+class personalities.Skills {
+- String name
+- String info
++ String getName()
++ String getInfo()
+}
+enum locations.Places {
++  Mountains
++  Airplane
++  Mine
++  AbstractWorld
+}
+class exceptions.LocationNotExist {
+- Object location
++ String getMessage()
+}
+class personalities.Person {
+- List<Skills> skills
+- String name
+- Integer age
+- Location location
++ void lookAfter(String,String)
++ void looseWorld()
++ void notice(String)
++ void drill(Location)
++ void notice()
++ void scream()
++ List<Skills> getSkills()
++ void addSkill(Skills)
++ void setLocation(Location)
++ Location getLocation()
++ int hashCode()
++ boolean equals(Object)
++ String toString()
++ String getName()
++ int getAge()
+}
+class personalities.Person$ValidateInfo {
+- {static} boolean validateLocation(Object)
+- {static} boolean validateName(String)
++ {static} boolean validateAge(Object)
+}
+class personalities.Everyone {
+- List<Skills> skills
+- Location location
++ {static} void tell()
++ {static} void controlWords()
++ {static} void rush()
++ {static} void feel()
++ String getName()
++ int getAge()
++ Location getLocation()
++ void addSkill(Skills)
+}
+class personalities.Everyone$ValidateLocation {
+- {static} boolean validateLocation(Object)
+}
+class Main {
++ {static} void main(String[])
+}
+interface locations.Locatable {
+~ String getPlace()
+~ void setType(Places)
+~ Places getType()
+}
+interface personalities.Humanable {
+~ String getName()
+~ int getAge()
+~ Location getLocation()
+~ void addSkill(Skills)
+}
+class subjects.Wind {
+- int speed
++ int getSpeed()
++ void setSpeed(int)
++ void driveCylinders()
+}
+
+
+exceptions.RuntimeException <|-- exceptions.InvalidName
+subjects.Subject <|-- subjects.Newspaper
+subjects.Newspaper +.. subjects.Newspaper$Bulletin
+subjects.Subject <|-- subjects.Phantom
+exceptions.Exception <|-- exceptions.InvalidAge
+subjects.Subject <|-- subjects.Mountains
+subjects.Subject <|-- subjects.Bulletins
+locations.Locatable <|.. locations.Location
+exceptions.Exception <|-- exceptions.LocationNotExist
+personalities.Humanable <|.. personalities.Person
+personalities.Person +.. personalities.Person$ValidateInfo
+personalities.Humanable <|.. personalities.Everyone
+personalities.Everyone +.. personalities.Everyone$ValidateLocation
+subjects.Subject <|-- subjects.Wind
+@enduml
