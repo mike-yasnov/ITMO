@@ -22,6 +22,7 @@ import java.util.Scanner;
  * - update id {element}: обновляет значение элемента коллекции с указанным id
  * - remove_by_id id: удаляет элемент из коллекции по указанному id
  * - clear: очищает коллекцию
+ * - save: сохряняет файл
  * - execute_script file_name: считывает и исполняет скрипт из указанного файла
  * - exit: завершает программу без сохранения изменений в файл
  * - remove_at index: удаляет элемент из коллекции по указанному индексу
@@ -80,6 +81,8 @@ public class CommandProcessor {
         commandHandlers.put("remove_at", this::removeProductAt);
         commandHandlers.put("filter_by_price", this::filterByPrice);
         commandHandlers.put("execute_script", this::executeScript);
+        commandHandlers.put("save", this::saveCollectionToFile);
+        commandHandlers.put("exit", this::exit);
     }
 
 
@@ -252,7 +255,7 @@ public class CommandProcessor {
     /**
      * Сохранение коллекции в файл
      */
-    private void saveCollectionToFile() {
+    private void saveCollectionToFile(String args) {
         try {
             productCollection.saveToFile(fileName);
         } catch (Exception e) {
@@ -524,7 +527,7 @@ public class CommandProcessor {
     /**
      * Останавливает программу
      */
-    private void exit() {
+    private void exit(String args) {
         System.out.println("Завершение работы программы. Коллекция не сохранена.");
         System.exit(0);
     }
