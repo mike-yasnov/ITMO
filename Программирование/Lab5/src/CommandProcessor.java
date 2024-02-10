@@ -8,6 +8,8 @@ import subjects.enums.UnitOfMeasure;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -20,7 +22,6 @@ import java.util.Scanner;
  * - update id {element}: обновляет значение элемента коллекции с указанным id
  * - remove_by_id id: удаляет элемент из коллекции по указанному id
  * - clear: очищает коллекцию
- * - save: сохраняет коллекцию в файл
  * - execute_script file_name: считывает и исполняет скрипт из указанного файла
  * - exit: завершает программу без сохранения изменений в файл
  * - remove_at index: удаляет элемент из коллекции по указанному индексу
@@ -35,11 +36,16 @@ public class CommandProcessor {
     private final ProductCollection productCollection;
     private Scanner scanner;
     private final String fileName;
+    private final Map<String, CommandHandler> commandHandlers;
+
 
     public CommandProcessor(ProductCollection productCollection, Scanner scanner, String fileName) {
         this.productCollection = productCollection;
         this.scanner = scanner;
         this.fileName = fileName;
+
+        this.commandHandlers = new HashMap<>();
+        initializeCommandHandlers();
     }
 
     /**
@@ -58,62 +64,43 @@ public class CommandProcessor {
      * Обрабатывает введенную пользователем команду.
      * @param command введенная пользователем команда
      */
-    private void processCommand(String input) {
-        String[] commandParts = input.split(" ", 2);
-        String command = commandParts[0].toLowerCase();
 
-        switch (command) {
-            case "help":
-                displayHelp();
-                break;
-            case "info":
-                info();
-                break;
-            case "add":
-                addProduct();
-                break;
-            case "update":
-                updateProduct(commandParts);
-                break;
-            case "remove_by_id":
-                removeProductById(commandParts);
-                break;
-            case "clear":
-                clearCollection();
-                break;
-            case "save":
-                saveCollectionToFile();
-                break;
-            case "show":
-                showCollection();
-                break;
-            case "sort":
-                sortCollection();
-                break;
-            case "reorder":
-                reorderCollection();
-                break;
-            case "remove_at":
-                removeProductAt(commandParts);
-                break;
-            case "print_ascending":
-                printAscending();
-                break;
-            case "print_field_descending_unit_of_measure":
-                printFieldDescendingUnitOfMeasure();
-                break;
-            case "filter_by_price":
-                filterByPrice(commandParts);
-                break;
-            case "execute_script":
-                executeScript(commandParts[1]);
-                break;
-            case "exit":
-                exit();
-                break;
-            default:
-                System.out.println("Некорректная команда. Введите 'help' для справки.");
+    private void initializeCommandHandlers() {
+        commandHandlers.put("help", this::help);
+        commandHandlers.put("info", this::info);
+        commandHandlers.put("add", this::addProduct);
+        commandHandlers.put("print_ascending", this::printAscending);
+        commandHandlers.put("print_field_descending_unit_of_measure", this::printFieldDescendingUnitOfMeasure);
+        commandHandlers.put("sort", this::sortCollection);
+        commandHandlers.put("reorder", this::reorderCollection);
+        commandHandlers.put("clear", this::clearCollection);
+        commandHandlers.put("show", this::showCollection);
+        commandHandlers.put("update", this::updateProduct);
+        commandHandlers.put("remove_by_id", this::removeProductById);
+        commandHandlers.put("remove_at", this::removeProductAt);
+        commandHandlers.put("filter_by_price", this::filterByPrice);
+        commandHandlers.put("execute_script", this::executeScript);
+    }
+
+
+    public void processCommand(String command) {
+        String[] parts = command.trim().split("\\s+", 2);
+        String commandName = parts[0];
+        CommandHandler handler = commandHandlers.get(commandName);
+        if (handler != null) {
+            if (parts.length > 1) {
+                handler.handle(parts[1]);
+            } else {
+                handler.handle(null);
+            }
+        } else {
+            System.out.println("Неизвестная команда: " + commandName + ". Используйте (help), чтобы посмотреть поддерживаемые команды.");
         }
+    }
+
+    @FunctionalInterface
+    private interface CommandHandler {
+        void handle(String args);
     }
 
     /**
@@ -125,7 +112,6 @@ public class CommandProcessor {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.equals("add")) {
-                    // Считываем данные о продукте из файла и передаем их в метод addProduct()
                     String productName = reader.readLine();
                     int productX = Integer.parseInt(reader.readLine());
                     int productY = Integer.parseInt(reader.readLine());
@@ -145,12 +131,10 @@ public class CommandProcessor {
 
                     Location personLocation = new Location(locationX, locationY, locationName);
 
-                    // Создаем экземпляр продукта и добавляем его в коллекцию
                     Product product = new Product(productName, new Coordinates(productX, productY), productPrice, productPartNumber, productManufactureCost, productUnitOfMeasure,
                             new Person(personName, personPassportId, personEyeColor, personHairColor, personNationality, personLocation));
                     productCollection.addProduct(product);
                 } else {
-                    // Передаем другие команды в обработку
                     processCommand(line);
                 }
             }
@@ -161,7 +145,7 @@ public class CommandProcessor {
     /**
      * Выводит справку по доступным командам.
      */
-    private void displayHelp() {
+    private void help(String args) {
         System.out.println("Доступные команды:");
         System.out.println("help : вывести справку по доступным командам");
         System.out.println("info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)");
@@ -186,25 +170,32 @@ public class CommandProcessor {
     }
 
     /**
+     * Выводит информацию о коллекции (тип, дата инициализации, количество элементов и т.д.).
+     */
+    private void info(String args) {
+        productCollection.info();
+    }
+
+    /**
      *  Удалить элемент из коллекции по его id
      *  @param commandParts части команд (команда, id продукта)
      */
-    private void removeProductById(String[] commandParts) {
-        int productId = Integer.parseInt(commandParts[1]);
+    private void removeProductById(String args) {
+        int productId = Integer.parseInt(args);
         productCollection.removeProductById(productId);
     }
     /**
      *  Удалить элемент, находящийся в заданной позиции коллекции (index)
      *  @param commandParts части команд (команда, index продукта)
      */
-    private void removeProductAt(String[] commandParts) {
-        if (commandParts.length < 2) {
+    private void removeProductAt(String args) {
+        if (args == null) {
             System.out.println("Ошибка: не указан индекс элемента для удаления.");
             return;
         }
 
         try {
-            int index = Integer.parseInt(commandParts[1]);
+            int index = Integer.parseInt(args);
             productCollection.removeProductAt(index);
         } catch (NumberFormatException e) {
             System.out.println("Ошибка: некорректный индекс. Индекс должен быть целым числом.");
@@ -213,27 +204,27 @@ public class CommandProcessor {
     /**
      * Вывести элементы коллекции в порядке возрастания
      */
-    private void printAscending() {
+    private void printAscending(String args) {
         productCollection.printAscending();
     }
     /**
      * Вывести значения поля unitOfMeasure всех элементов в порядке убывания
      */
-    private void printFieldDescendingUnitOfMeasure() {
+    private void printFieldDescendingUnitOfMeasure(String args) {
         productCollection.printFieldDescendingUnitOfMeasure();
     }
     /**
      * Вывести элементы, значение поля price которых равно заданному
      *  @param commandParts части команд (команда, цена продукта)
      */
-    private void filterByPrice(String[] commandParts) {
-        if (commandParts.length < 2) {
+    private void filterByPrice(String args) {
+        if (args == null) {
             System.out.println("Ошибка: не указана цена для фильтрации.");
             return;
         }
 
         try {
-            long price = Long.parseLong(commandParts[1]);
+            long price = Long.parseLong(args);
             productCollection.filterByPrice(price);
         } catch (NumberFormatException e) {
             System.out.println("Ошибка: некорректная цена. Цена должна быть целым числом.");
@@ -242,19 +233,19 @@ public class CommandProcessor {
     /**
      * Отсортировать коллекцию в естественном порядке
      */
-    private void sortCollection() {
+    private void sortCollection(String args) {
         productCollection.sortCollection();
     }
     /**
      * Отсортировать коллекцию в порядке, обратном нынешнему
      */
-    private void reorderCollection() {
+    private void reorderCollection(String args) {
         productCollection.reorderCollection();
     }
     /**
      * Удаляет все элементы коллекции
      */
-    private void clearCollection() {
+    private void clearCollection(String args) {
         productCollection.clearCollection();
     }
 
@@ -272,7 +263,7 @@ public class CommandProcessor {
     /**
      * Выводит всю коллекцию
      */
-    private void showCollection() {
+    private void showCollection(String args) {
         for (Product product : productCollection.getProducts()) {
             System.out.println(product);
         }
@@ -363,7 +354,7 @@ public class CommandProcessor {
     /**
      * Добавляет новый продукт в коллекцию
      */
-    private void addProduct() {
+    private void addProduct(String args) {
         boolean validInput = false;
         System.out.print("Введите название товара: ");
         String name = scanner.nextLine();
@@ -442,10 +433,10 @@ public class CommandProcessor {
      * Обновляет продукт по его id
      * @param commandParts части команд (команда, id продукта)
      */
-    private void updateProduct(String[] commandParts) {
+    private void updateProduct(String args) {
         int productId;
         try {
-            productId = Integer.parseInt(commandParts[1]);
+            productId = Integer.parseInt(args);
         } catch (NumberFormatException e) {
             System.out.println("Некорректный формат id. Пожалуйста, введите целое число.");
             return;
@@ -528,13 +519,6 @@ public class CommandProcessor {
             }
         }
         return null;
-    }
-
-    /**
-     * Выводит информацию о коллекции (тип, дата инициализации, количество элементов и т.д.).
-     */
-    private void info() {
-        productCollection.info();
     }
 
     /**
