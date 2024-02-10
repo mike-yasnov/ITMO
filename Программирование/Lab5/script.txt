@@ -1,0 +1,37 @@
+add
+iPhone 13
+10
+20
+1000
+1234567890123456
+700
+KILOGRAMS
+John Doe
+123456789
+BROWN
+BROWN
+GERMANY
+1000
+12
+Dublin
+add
+Samsung Galaxy S21
+15
+25
+800
+1234567890123457
+600
+GRAMS
+Jane Smith
+987654321
+YELLOW
+YELLOW
+CHINA
+1000
+12
+Dublin
+info
+show
+remove_at 1
+show
+info
