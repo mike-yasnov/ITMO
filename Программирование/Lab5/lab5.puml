@@ -1,0 +1,146 @@
+@startuml
+class Main {
++ {static} void main(String[])
+}
+class subjects.Person {
+- String name
+- String passportID
+- Color eyeColor
+- Color hairColor
+- Country nationality
+- Location location
++ String getName()
++ String getPassportID()
++ Color getEyeColor()
++ void setEyeColor(Color)
++ Color getHairColor()
++ void setHairColor(Color)
++ Country getNationality()
++ void setNationality(Country)
++ Location getLocation()
++ void setLocation(Location)
+}
+class subjects.Product {
+- Integer id
+- {static} int lastId
+- String name
+- Coordinates coordinates
+- ZonedDateTime creationDate
+- Long price
+- String partNumber
+- Integer manufactureCost
+- UnitOfMeasure unitOfMeasure
+- Person owner
+- {static} Set<String> usedPartNumbers
+- void checkPartNumber(String)
++ Integer getId()
++ String getName()
++ Coordinates getCoordinates()
++ ZonedDateTime getCreationDate()
++ Long getPrice()
++ String getPartNumber()
++ void setPartNumber(String)
++ Integer getManufactureCost()
++ void setManufactureCost(Integer)
++ UnitOfMeasure getUnitOfMeasure()
++ void setUnitOfMeasure(UnitOfMeasure)
++ void setCreationDate(ZonedDateTime)
++ Person getOwner()
++ void setOwner(Person)
++ void setId(Integer)
++ String toString()
++ int compareTo(Product)
+}
+class subjects.Location {
+- Long x
+- Integer y
+- String name
++ Long getX()
++ void setX(Long)
++ Integer getY()
++ void setY(Integer)
++ String getName()
++ void setName(String)
++ String toString()
+}
+class CommandProcessor {
+- ProductCollection productCollection
+- Scanner scanner
+- String fileName
++ void run()
+- void processCommand(String)
++ void executeScript(String)
+- void displayHelp()
+- void removeProductById(String[])
+- void removeProductAt(String[])
+- void printAscending()
+- void printFieldDescendingUnitOfMeasure()
+- void filterByPrice(String[])
+- void sortCollection()
+- void reorderCollection()
+- void clearCollection()
+- void saveCollectionToFile()
+- void showCollection()
+- UnitOfMeasure promptUnitOfMeasure()
+- Color promptColor(String)
+- Person promptPerson()
+- Country promptCountry()
+- Location promptLocation()
+- void addProduct()
+- void updateProduct(String[])
+- Product findProductById(int)
+- void info()
+- void exit()
+}
+enum subjects.enums.Country {
++  GERMANY
++  CHINA
++  NORTH_KOREA
++  USA
+}
+class subjects.Coordinates {
+- Integer x
+- int y
++ Integer getX()
++ void setX(Integer)
++ int getY()
++ void setY(int)
+}
+enum subjects.enums.UnitOfMeasure {
++  KILOGRAMS
++  GRAMS
++  MILLIGRAMS
+- int value
++ int getValue()
+}
+enum subjects.enums.Color {
++  GREEN
++  BLUE
++  YELLOW
++  WHITE
++  BROWN
+}
+class ProductCollection {
+- LinkedList<subjects.Product> products
+- ZonedDateTime initializationDate
++ void info()
++ void addProduct(Product)
++ void updateProduct(int,Product)
++ void removeProductById(int)
++ void clearCollection()
++ void saveToFile(String)
++ void loadFromFile(String)
+- Element createProductElement(Document,Product)
+- Product createProductFromElement(Element)
++ void sortCollection()
++ void reorderCollection()
++ void removeProductAt(int)
++ void printAscending()
++ void printFieldDescendingUnitOfMeasure()
++ void filterByPrice(long)
++ LinkedList<Product> getProducts()
+}
+
+
+subjects.Comparable <|.. subjects.Product
+@enduml
