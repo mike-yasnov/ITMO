@@ -67,30 +67,35 @@ class CommandProcessor {
 - ProductCollection productCollection
 - Scanner scanner
 - String fileName
+- Map<String,CommandHandler> commandHandlers
 + void run()
-- void processCommand(String)
+- void initializeCommandHandlers()
++ void processCommand(String)
 + void executeScript(String)
-- void displayHelp()
-- void removeProductById(String[])
-- void removeProductAt(String[])
-- void printAscending()
-- void printFieldDescendingUnitOfMeasure()
-- void filterByPrice(String[])
-- void sortCollection()
-- void reorderCollection()
-- void clearCollection()
-- void saveCollectionToFile()
-- void showCollection()
+- void help(String)
+- void info(String)
+- void removeProductById(String)
+- void removeProductAt(String)
+- void printAscending(String)
+- void printFieldDescendingUnitOfMeasure(String)
+- void filterByPrice(String)
+- void sortCollection(String)
+- void reorderCollection(String)
+- void clearCollection(String)
+- void saveCollectionToFile(String)
+- void showCollection(String)
 - UnitOfMeasure promptUnitOfMeasure()
 - Color promptColor(String)
 - Person promptPerson()
 - Country promptCountry()
 - Location promptLocation()
-- void addProduct()
-- void updateProduct(String[])
+- void addProduct(String)
+- void updateProduct(String)
 - Product findProductById(int)
-- void info()
-- void exit()
+- void exit(String)
+}
+interface CommandProcessor$CommandHandler {
+~ void handle(String)
 }
 enum subjects.enums.Country {
 +  GERMANY
@@ -118,7 +123,7 @@ enum subjects.enums.Color {
 +  BLUE
 +  YELLOW
 +  WHITE
-+  BROWN
++  ORANGE
 }
 class ProductCollection {
 - LinkedList<subjects.Product> products
@@ -143,4 +148,5 @@ class ProductCollection {
 
 
 subjects.Comparable <|.. subjects.Product
+CommandProcessor +.. CommandProcessor$CommandHandler
 @enduml
