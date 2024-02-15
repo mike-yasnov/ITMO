@@ -65,7 +65,6 @@ public class CommandProcessor {
      * Обрабатывает введенную пользователем команду.
      * @param command введенная пользователем команда
      */
-
     private void initializeCommandHandlers() {
         commandHandlers.put("help", this::help);
         commandHandlers.put("info", this::info);
@@ -84,7 +83,6 @@ public class CommandProcessor {
         commandHandlers.put("save", this::saveCollectionToFile);
         commandHandlers.put("exit", this::exit);
     }
-
 
     public void processCommand(String command) {
         String[] parts = command.trim().split("\\s+", 2);
