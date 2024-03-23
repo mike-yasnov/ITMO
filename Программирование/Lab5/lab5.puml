@@ -1,24 +1,6 @@
 @startuml
-class Main {
-+ {static} void main(String[])
-}
-class subjects.Person {
-- String name
-- String passportID
-- Color eyeColor
-- Color hairColor
-- Country nationality
-- Location location
-+ String getName()
-+ String getPassportID()
-+ Color getEyeColor()
-+ void setEyeColor(Color)
-+ Color getHairColor()
-+ void setHairColor(Color)
-+ Country getNationality()
-+ void setNationality(Country)
-+ Location getLocation()
-+ void setLocation(Location)
+class utils.XmlFileReader {
++ Document readXmlFile(String)
 }
 class subjects.Product {
 - Integer id
@@ -51,19 +33,15 @@ class subjects.Product {
 + String toString()
 + int compareTo(Product)
 }
-class subjects.Location {
-- Long x
-- Integer y
-- String name
-+ Long getX()
-+ void setX(Long)
-+ Integer getY()
-+ void setY(Integer)
-+ String getName()
-+ void setName(String)
-+ String toString()
+class subjects.Coordinates {
+- Integer x
+- int y
++ Integer getX()
++ void setX(Integer)
++ int getY()
++ void setY(int)
 }
-class CommandProcessor {
+class processors.CommandProcessor {
 - ProductCollection productCollection
 - Scanner scanner
 - String fileName
@@ -94,29 +72,8 @@ class CommandProcessor {
 - Product findProductById(int)
 - void exit(String)
 }
-interface CommandProcessor$CommandHandler {
+interface processors.CommandProcessor$CommandHandler {
 ~ void handle(String)
-}
-enum subjects.enums.Country {
-+  GERMANY
-+  CHINA
-+  NORTH_KOREA
-+  USA
-}
-class subjects.Coordinates {
-- Integer x
-- int y
-+ Integer getX()
-+ void setX(Integer)
-+ int getY()
-+ void setY(int)
-}
-enum subjects.enums.UnitOfMeasure {
-+  KILOGRAMS
-+  GRAMS
-+  MILLIGRAMS
-- int value
-+ int getValue()
 }
 enum subjects.enums.Color {
 +  GREEN
@@ -125,9 +82,40 @@ enum subjects.enums.Color {
 +  WHITE
 +  ORANGE
 }
-class ProductCollection {
+class Main {
++ {static} void main(String[])
+}
+class utils.ProductToXmlElementConverter {
++ Element createProductElement(Document,Product)
+}
+class subjects.Person {
+- String name
+- String passportID
+- Color eyeColor
+- Color hairColor
+- Country nationality
+- Location location
++ String getName()
++ String getPassportID()
++ Color getEyeColor()
++ void setEyeColor(Color)
++ Color getHairColor()
++ void setHairColor(Color)
++ Country getNationality()
++ void setNationality(Country)
++ Location getLocation()
++ void setLocation(Location)
+}
+class utils.ProductFromXmlElementConverter {
++ Product createProductFromElement(Element)
+}
+class processors.ProductCollection {
 - LinkedList<subjects.Product> products
 - ZonedDateTime initializationDate
+- XmlFileReader xmlFileReader
+- XmlFileWriter xmlFileWriter
+- ProductFromXmlElementConverter productFromXmlElementConverter
+- ProductToXmlElementConverter productToXmlElementConverter
 + void info()
 + void addProduct(Product)
 + void updateProduct(int,Product)
@@ -135,8 +123,6 @@ class ProductCollection {
 + void clearCollection()
 + void saveToFile(String)
 + void loadFromFile(String)
-- Element createProductElement(Document,Product)
-- Product createProductFromElement(Element)
 + void sortCollection()
 + void reorderCollection()
 + void removeProductAt(int)
@@ -145,8 +131,36 @@ class ProductCollection {
 + void filterByPrice(long)
 + LinkedList<Product> getProducts()
 }
+class subjects.Location {
+- Long x
+- Integer y
+- String name
++ Long getX()
++ void setX(Long)
++ Integer getY()
++ void setY(Integer)
++ String getName()
++ void setName(String)
++ String toString()
+}
+enum subjects.enums.Country {
++  GERMANY
++  CHINA
++  NORTH_KOREA
++  USA
+}
+class utils.XmlFileWriter {
++ void writeXmlFile(Document,String)
+}
+enum subjects.enums.UnitOfMeasure {
++  KILOGRAMS
++  GRAMS
++  MILLIGRAMS
+- int value
++ int getValue()
+}
 
 
 subjects.Comparable <|.. subjects.Product
-CommandProcessor +.. CommandProcessor$CommandHandler
+processors.CommandProcessor +.. processors.CommandProcessor$CommandHandler
 @enduml
