@@ -1,3 +1,6 @@
+import processors.CommandProcessor;
+import processors.ProductCollection;
+
 import java.util.*;
 
 public class Main {
