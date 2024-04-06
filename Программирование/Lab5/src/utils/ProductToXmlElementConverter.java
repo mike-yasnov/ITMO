@@ -5,6 +5,11 @@ import org.w3c.dom.Element;
 import subjects.Product;
 
 public class ProductToXmlElementConverter {
+    /**
+     *  Метод для запси продукта в XML файл
+     * @param document - документ, куда бует писаться данный продукт;
+     * @param product - продукт, который будет писаться в документ
+     */
     public Element createProductElement(Document document, Product product) {
         // Создаем элемент продукта и добавляем в него все необходимые элементы и атрибуты
         Element productElement = document.createElement("product");

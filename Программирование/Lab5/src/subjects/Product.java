@@ -117,16 +117,16 @@ public class Product implements Comparable<Product> {
 
     @Override
     public String toString() {
-        return "models.Product{id=" + id +
+        return "Продукт: (id=" + id +
                 ", name='" + name + '\'' +
-                ", coordinates=" + coordinates +
-                ", creationDate=" + creationDate +
-                ", price=" + price +
-                ", partNumber='" + partNumber + '\'' +
-                ", manufactureCost=" + manufactureCost +
-                ", unitOfMeasure=" + unitOfMeasure +
-                ", owner=" + owner +
-                '}';
+                "\n coordinates=" + coordinates +
+                "\n creationDate=" + creationDate +
+                "\n price=" + price +
+                "\n partNumber='" + partNumber + '\'' +
+                "\n manufactureCost=" + manufactureCost +
+                "\n unitOfMeasure=" + unitOfMeasure +
+                "\n owner=" + owner +
+                ')';
     }
     @Override
     public int compareTo(Product otherProduct) {

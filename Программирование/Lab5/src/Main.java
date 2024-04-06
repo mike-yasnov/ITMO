@@ -1,20 +1,17 @@
 import processors.CommandProcessor;
 import processors.ProductCollection;
+import utils.FilePathReader;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        String fileName = System.getenv("XML_FILE_PATH");
-        if (fileName != null) {
-            System.out.println("Путь к файлу XML: " + fileName);
-        } else {
-            System.err.println("Переменная окружения XML_FILE_PATH не установлена");
-            System.exit(0);
-        }
+        String fileName = FilePathReader.getXmlFilePath();
 
         ProductCollection productCollection = new ProductCollection();
-        productCollection.loadFromFile(fileName);
+        if (fileName != null) {
+            productCollection.loadFromFile(fileName);
+        }
 
         Scanner scanner = new Scanner(System.in);
         CommandProcessor commandProcessor = new CommandProcessor(productCollection, scanner, fileName);

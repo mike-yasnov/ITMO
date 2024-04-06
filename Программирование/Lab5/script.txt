@@ -3,7 +3,7 @@ iPhone 13
 10
 20
 1000
-1234567890123456
+1234567890djhsfbkvhbdcx88888123456
 700
 KILOGRAMS
 John Doe
@@ -19,7 +19,7 @@ Samsung Galaxy S21
 15
 25
 800
-1234567890123457
+1234567890124838530835034805383457
 600
 GRAMS
 Jane Smith
@@ -35,3 +35,4 @@ show
 remove_at 1
 show
 info
+execute_script tmp.txt

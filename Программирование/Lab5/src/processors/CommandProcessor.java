@@ -10,10 +10,9 @@ import subjects.enums.UnitOfMeasure;
 
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Класс для обработки команд пользователя.
@@ -41,6 +40,7 @@ public class CommandProcessor {
     private Scanner scanner;
     private final String fileName;
     private final Map<String, CommandHandler> commandHandlers;
+    private static List<String> executedScripts;
 
 
     public CommandProcessor(ProductCollection productCollection, Scanner scanner, String fileName) {
@@ -49,6 +49,7 @@ public class CommandProcessor {
         this.fileName = fileName;
 
         this.commandHandlers = new HashMap<>();
+        this.executedScripts = new ArrayList<>();
 
 //        this.scriptExecutor = new ScriptExecutor(this);
         initializeCommandHandlers();
@@ -114,6 +115,13 @@ public class CommandProcessor {
      * @param fileName путь к файлу со скриптом
      */
     public void executeScript(String fileName) {
+
+        if (executedScripts.contains(fileName)) {
+            System.out.println("Обнаружена возможность бесконечной рекурсии: скрипт " + fileName + " уже был выполнен ранее.");
+            return;
+        }
+        executedScripts.add(fileName);
+
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -144,8 +152,12 @@ public class CommandProcessor {
                     processCommand(line);
                 }
             }
+        } catch (FileNotFoundException e) {
+            System.err.println("Ошибка: файл скрипта " + fileName + " не найден.");
         } catch (Exception e) {
             System.err.println("Ошибка при выполнении скрипта: " + e.getMessage());
+        } finally {
+            executedScripts.remove(fileName); // удаляем имя скрипта из списка выполненных
         }
     }
     /**
@@ -361,13 +373,30 @@ public class CommandProcessor {
     private Location promptLocation() {
         System.out.println("Введите данные о местоположении:");
 
-        System.out.print("Координата x: ");
-        Long x = Long.parseLong(scanner.nextLine());
+        boolean validInput = false;
+        Long x= 0L;
+        do {
+            try {
+                System.out.print("Введите координату x: ");
+                x = Long.parseLong(scanner.nextLine());
+                validInput = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: Некорректный формат числа. Пожалуйста, введите число заново.");
+            }
+        } while (!validInput);
 
-        System.out.print("Координата y: ");
-        Integer y = Integer.parseInt(scanner.nextLine());
+        validInput = false;
+        int y=0;
+        do {
+            try {
+                System.out.print("Введите координату y: ");
+                y = Integer.parseInt(scanner.nextLine());
+                validInput = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: Некорректный формат числа. Пожалуйста, введите число заново.");
+            }
+        } while (!validInput);
 
-        System.out.print("Название места: ");
         String name = scanner.nextLine();
 
         return new Location(x, y, name);
@@ -377,9 +406,23 @@ public class CommandProcessor {
      */
     private void addProduct(String args) {
         boolean validInput = false;
-        System.out.print("Введите название товара: ");
-        String name = scanner.nextLine();
+        String name = "";
+        do {
+            try {
+                System.out.print("Введите название товара: ");;
+                name = scanner.nextLine();
+                if (name.length() >= 0) {
+                    validInput = true;
+                }
+                else {
+                    System.out.println("Ошибка: Имя не может быть пустым. Пожалуйста, введите заново.");
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (!validInput);
 
+        validInput = false;
         Integer x=0;
         do {
             try {
@@ -449,7 +492,12 @@ public class CommandProcessor {
             try {
                 System.out.print("Введите стоимость производства: ");
                 manufacturePrice = Integer.parseInt(scanner.nextLine());
-                validInput = true;
+                if (manufacturePrice > 0) {
+                    validInput = true;
+                } else {
+                    System.out.println("Ошибка: Стоимость производства не должена быть меньше 0. Пожалуйста, введите число заново.");
+                }
+
             } catch (NumberFormatException e) {
                 System.out.println("Ошибка: Некорректный формат числа. Пожалуйста, введите число заново.");
             }
@@ -589,7 +637,7 @@ public class CommandProcessor {
      * Останавливает программу
      */
     private void exit(String args) {
-        System.out.println("Завершение работы программы. Коллекция не сохранена.");
+        System.out.println("Завершение работы программы.");
         System.exit(0);
     }
 }

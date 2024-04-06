@@ -72,4 +72,16 @@ public class Person {
     public void setLocation(Location location) {
         this.location = location;
     }
+    @Override
+    public String toString() {
+        return "Person(" +
+                "name='" + name + '\'' +
+                "\n passportID='" + passportID + '\'' +
+                "\n eyeColor=" + eyeColor +
+                "\n hairColor=" + hairColor +
+                "\n nationality=" + nationality +
+                "\n location=" + location +
+                ')';
+    }
+
 }

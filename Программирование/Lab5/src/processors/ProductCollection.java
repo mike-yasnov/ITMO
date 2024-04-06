@@ -115,9 +115,16 @@ public class ProductCollection {
             if (document != null) {
                 NodeList nodeList = document.getElementsByTagName("product");
                 for (int i = 0; i < nodeList.getLength(); i++) {
-                    Element element = (Element) nodeList.item(i);
-                    Product product = productFromXmlElementConverter.createProductFromElement(element);
-                    products.add(product);
+                    try {
+                        Element element = (Element) nodeList.item(i);
+                        Product product = productFromXmlElementConverter.createProductFromElement(element);
+                        if (product != null) {
+                            products.add(product);
+                        }
+
+                    } catch (Exception e) {
+                        System.out.println();
+                    }
                 }
             }
         } catch (Exception e) {

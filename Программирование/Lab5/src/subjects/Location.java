@@ -47,10 +47,10 @@ public class Location {
 
     @Override
     public String toString() {
-        return "models.Location{" +
+        return "Location(" +
                 "x=" + x +
                 ", y=" + y +
                 ", name='" + name + '\'' +
-                '}';
+                ')';
     }
 }
