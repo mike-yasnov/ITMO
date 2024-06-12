@@ -137,57 +137,55 @@ public class Runner {
         if (command == null)
             return new ExecutionResponse(false, "Команда '" + userCommand[0] + "' не найдена. Наберите 'help' для справки");
 
-        switch (userCommand[0]) {
-
-            case "execute_script" -> {
-                ExecutionResponse tmp = new ExecuteScript(console).apply(userCommand);
-                if (!tmp.getExitCode()) return tmp;
-                ExecutionResponse tmp2 = scriptMode(userCommand[1]);
-                return new ExecutionResponse(tmp2.getExitCode(), tmp.getMassage() + "\n" + tmp2.getMassage().trim());
+        if (userCommand[0].equals("execute_script")) {
+            ExecutionResponse tmp = new ExecuteScript(console).apply(userCommand);
+            if (!tmp.getExitCode()) {
+                return tmp;
             }
-            default -> {
-                byte[] bytes = new byte[userCommand.length];
-                if (command == CommandTypes.UPDATE) {
-                    try {
-                        bytes = NetworkManager.serializer(new Container(command, Ask.askProduct(console, Integer.parseInt(userCommand[1])).getDataString()));
-                    } catch (Ask.AskBreak e) {
-                        console.println("Отмена...");
-                    }
-                } else if (command == CommandTypes.HELP) {
-                    console.println(new Help(console,commands).apply(userCommand).getMassage());
-                } else if (command == CommandTypes.EXIT) {
-                    bytes = NetworkManager.serializer(new Container(CommandTypes.SAVE, ""));
-                    networkManager.sendData(bytes);
-                    return new Exit(console).apply(userCommand);
-                } else if (command == CommandTypes.REMOVE_BY_ID ) {
-                    bytes = NetworkManager.serializer(new Container(command, userCommand[1]));
-                } else if (command == CommandTypes.FILTER_BY_PRICE ) {
-                    bytes = NetworkManager.serializer(new Container(command, userCommand[1]));
-                } else if (command == CommandTypes.REMOVE_AT ) {
-                    bytes = NetworkManager.serializer(new Container(command, userCommand[1]));
-
-                } else if (command == CommandTypes.ADD) {
-                    try {
-                        bytes = NetworkManager.serializer(new Container(command, Ask.askProduct(console, 0).getDataString()));
-                    } catch (Ask.AskBreak e) {
-                        console.println("Отмена...");
-                    }
-                } else if (command == CommandTypes.HISTORY) {
-
-                    console.println(new History(console,commandHistory).apply(userCommand).getMassage());
+            ExecutionResponse tmp2 = scriptMode(userCommand[1]);
+            return new ExecutionResponse(tmp2.getExitCode(), tmp.getMassage() + "\n" + tmp2.getMassage().trim());
+        } else {
+            byte[] bytes = new byte[userCommand.length];
+            if (command == CommandTypes.UPDATE) {
+                try {
+                    bytes = NetworkManager.serializer(new Container(command, Ask.askProduct(console, Integer.parseInt(userCommand[1])).getDataString()));
+                } catch (Ask.AskBreak e) {
+                    console.println("Отмена...");
                 }
-                else {
-                    bytes = NetworkManager.serializer(new Container(command, ""));
+            } else if (command == CommandTypes.HELP) {
+                console.println(new Help(console, commands).apply(userCommand).getMassage());
+            } else if (command == CommandTypes.EXIT) {
+                bytes = NetworkManager.serializer(new Container(CommandTypes.SAVE, ""));
+                networkManager.sendData(bytes);
+                return new Exit(console).apply(userCommand);
+            } else if (command == CommandTypes.REMOVE_BY_ID) {
+                bytes = NetworkManager.serializer(new Container(command, userCommand[1]));
+            } else if (command == CommandTypes.FILTER_BY_PRICE) {
+                bytes = NetworkManager.serializer(new Container(command, userCommand[1]));
+            } else if (command == CommandTypes.REMOVE_AT) {
+                bytes = NetworkManager.serializer(new Container(command, userCommand[1]));
+            } else if (command == CommandTypes.ADD) {
+                try {
+                    bytes = NetworkManager.serializer(new Container(command, Ask.askProduct(console, 0).getDataString()));
+                } catch (Ask.AskBreak e) {
+                    console.println("Отмена...");
                 }
-                commandHistory.add(command.Type());
-                if (command != CommandTypes.HELP & command != CommandTypes.HISTORY) {
-                    networkManager.sendData(bytes);
-                    var data = networkManager.receiveData(5069);
-                    response = NetworkManager.deserialize(data);
-                    return response;
-                }
-                else return new ExecutionResponse(false,"");
+            } else if (command == CommandTypes.HISTORY) {
+                console.println(new History(console, commandHistory).apply(userCommand).getMassage());
+            } else {
+                bytes = NetworkManager.serializer(new Container(command, ""));
+            }
+            commandHistory.add(command.Type());
+            if (command != CommandTypes.HELP && command != CommandTypes.HISTORY) {
+                networkManager.sendData(bytes);
+                var data = networkManager.receiveData(5069);
+                response = NetworkManager.deserialize(data);
+                return response;
+            } else {
+                return new ExecutionResponse(false, "");
             }
         }
+
     }
 }
+

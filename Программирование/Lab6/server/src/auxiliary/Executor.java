@@ -152,15 +152,15 @@ public class Executor {
         var command = commandManager.getCommands().get(userCommand[0]);
 
         if (command == null) return new ExecutionResponse(false, "Команда '" + userCommand[0] + "' не найдена. Наберите 'help' для справки");
-
-        switch (userCommand[0]) {
-            case "execute_script" -> {
-                ExecutionResponse tmp = commandManager.getCommands().get("execute_script").apply(userCommand);
-                if (!tmp.getExitCode()) return tmp;
-                ExecutionResponse tmp2 = scriptMode(userCommand[1]);
-                return new ExecutionResponse(tmp2.getExitCode(), tmp.getMassage()+"\n"+tmp2.getMassage().trim());
-            }
-            default -> { return command.apply(userCommand); }
-        }
+	if (userCommand[0].equals("execute_script")) {
+	    ExecutionResponse tmp = commandManager.getCommands().get("execute_script").apply(userCommand);
+	    if (!tmp.getExitCode()) {
+       		 return tmp;
+    		}
+    	    ExecutionResponse tmp2 = scriptMode(userCommand[1]);
+   	    return new ExecutionResponse(tmp2.getExitCode(), tmp.getMassage() + "\n" + tmp2.getMassage().trim());
+		} else {
+   	 return command.apply(userCommand);
+	}
     }
 }
