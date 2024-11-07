@@ -20,7 +20,7 @@ def mandelbrot_set(width, height, max_iter=100, zoom=1, x_center=0, y_center=0):
 
 width, height = 800, 800
 # Параметры итераций и масштабирования
-iterations_zoom_list = [(10, 1), (50, 1.5), (100, 2), (300, 2.5)]
+iterations_zoom_list = [(10, 1), (50, 2), (100, 2.5), (300, 3)]
 
 plt.figure(figsize=(16, 16))
 plt.suptitle('Множество Мандельброта', fontsize=32, y=1.05)
@@ -28,7 +28,7 @@ plt.suptitle('Множество Мандельброта', fontsize=32, y=1.05)
 for idx, (max_iter, zoom) in enumerate(iterations_zoom_list):
     plt.subplot(2, 2, idx + 1)
     mandelbrot_img = mandelbrot_set(width, height, max_iter=max_iter, zoom=zoom)
-    plt.imshow(mandelbrot_img, cmap='hot', extent=[-2 / zoom, 2 / zoom, -2 / zoom, 2 / zoom])
+    plt.imshow(mandelbrot_img, cmap='inferno', extent=[-2 / zoom, 2 / zoom, -2 / zoom, 2 / zoom])
     plt.colorbar()
     plt.title(f'Итерации = {max_iter}, Приближение = {zoom}x')
 
