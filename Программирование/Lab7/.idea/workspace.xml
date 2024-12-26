@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="server:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c8e6cc2d-2025-4595-adcc-7290379a5295" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/gson_2_10_1__1_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/client.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/Client.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/auxiliary/Runner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/commands/ExecuteScript.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/commands/Exit.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/commands/Help.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/commands/History.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/managers/NetworkManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/common.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/auxiliary/Console.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/auxiliary/Element.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/auxiliary/ExecutionResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/auxiliary/StandardConsole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/auxiliary/Validatable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/commands/Command.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/commands/CommandTypes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/commands/Container.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/commands/Describable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/commands/Executable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/managers/Ask.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/models/Coordinates.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/models/Country.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/models/EyeColor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/models/HairColor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/models/Location.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/models/Person.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/models/Product.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/models/UnitOfMeasure.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab6_YM.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/config.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/lib/gson-2.10.1 (1).jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/Server.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/auxiliary/Record.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/commands/Add.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/commands/Backup.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/commands/Clear.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/commands/FilterByPrice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/commands/Info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/commands/Login.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/commands/PrintAscending.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/commands/PrintFieldDescendingUnitOfMeasure.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/commands/Register.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/commands/RemoveAt.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/commands/RemoveById.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/commands/Reorder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/commands/Show.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/commands/Sort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/commands/Update.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/managers/CollectionManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/managers/CommandManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/managers/DBManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/managers/NetworkManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2guyCNlHLLChElykP3T0Invp2EW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Client.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Server.executor&quot;: &quot;Run&quot;,
+    &quot;JAR Application.client.jar.executor&quot;: &quot;Run&quot;,
+    &quot;JAR Application.server.jar.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/mike-yasnov/Desktop/ITMO/Программирование/Lab7&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\TBG Computers\Desktop\help labs\lab6_YM\server\src" />
+      <recent name="C:\Users\TBG Computers\Desktop\help labs\lab6_YM\common\src" />
+      <recent name="C:\Users\TBG Computers\Desktop\help labs\lab6_YM\client\src" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\TBG Computers\Desktop\help labs\lab6_YM\server\lib" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JAR Application.server.jar">
+    <configuration name="Server (3)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Server" />
+      <module name="server" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server (4)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Server" />
+      <module name="server" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server (5)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Server" />
+      <module name="server" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Server" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="Server" />
+      <module name="server" />
+      <option name="PROGRAM_PARAMETERS" value="config.cfg" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="App" type="CompoundRunConfigurationType">
+      <toRun name="Server" type="Application" />
+      <method v="2" />
+    </configuration>
+    <configuration name="client.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/client.jar" />
+      <method v="2" />
+    </configuration>
+    <configuration name="server.jar" type="JarApplication" temporary="true">
+      <option name="JAR_PATH" value="$PROJECT_DIR$/server.jar" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Server" />
+      <item itemvalue="Application.Server (3)" />
+      <item itemvalue="Application.Server (4)" />
+      <item itemvalue="Application.Server (5)" />
+      <item itemvalue="Compound.App" />
+      <item itemvalue="JAR Application.client.jar" />
+      <item itemvalue="JAR Application.server.jar" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JAR Application.server.jar" />
+        <item itemvalue="JAR Application.client.jar" />
+        <item itemvalue="Application.Server (5)" />
+        <item itemvalue="Application.Server (4)" />
+        <item itemvalue="Application.Server (3)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c8e6cc2d-2025-4595-adcc-7290379a5295" name="Changes" comment="" />
+      <created>1716561635975</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716561635975</updated>
+      <workItem from="1718178279110" duration="941000" />
+      <workItem from="1718179226816" duration="2374000" />
+      <workItem from="1719050794039" duration="369000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IllegalArgumentException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

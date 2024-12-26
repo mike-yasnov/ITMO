@@ -1,0 +1,170 @@
+ORG 0x600               
+
+TENTHOUS: WORD 0
+THOUS: WORD 0           
+HUNDR: WORD 0           
+TENS: WORD 0            
+RESULT_ADDR: WORD 0     
+TMP: WORD 0             
+
+START: CLA              
+
+; Перевод на новую строку на ВУ-5
+NEWLINE:
+    IN 0x0D             
+    AND #0x40           
+    BEQ NEWLINE         
+    LD #0x0A
+    OUT 0x0C            
+
+; Ввод данных с ВУ-8 до пробела
+INPUT_LOOP:
+    IN 0x19             
+    AND #0x40           
+    BEQ INPUT_LOOP      
+
+    IN 0x18             
+    CMP #0x20           
+    BEQ CALC_HUNDREDS   
+
+    CMP #0x3A           
+    BLO CONVERT_DIGIT   
+
+CHECK_LETTER:
+    CMP #0x61           
+    BEQ CONVERT_A       
+    CMP #0x62           
+    BEQ CONVERT_B       
+    CMP #0x63           
+    BEQ CONVERT_C       
+    CMP #0x64           
+    BEQ CONVERT_D       
+
+    JUMP INPUT_LOOP     
+
+CONVERT_DIGIT:
+    SUB #0x30           
+    JUMP STORE_TMP
+
+CONVERT_A:
+    LD #0x0A            
+    JUMP STORE_TMP
+
+CONVERT_B:
+    LD #0x0B            
+    JUMP STORE_TMP
+
+CONVERT_C:
+    LD #0x0C            
+    JUMP STORE_TMP
+
+CONVERT_D:
+    LD #0x0D            
+
+STORE_TMP:
+    ST TMP              
+
+    ; Умножаем AC на 14
+    LD RESULT_ADDR      
+    ASL                 
+    ASL                 
+    ASL                 
+    ASL                 
+    SUB RESULT_ADDR     
+    SUB RESULT_ADDR     
+    ADD TMP             
+
+    ST RESULT_ADDR      
+    JUMP INPUT_LOOP     
+
+; Конвертация результата в сотни, десятки и единицы
+CALC_HUNDREDS:
+    LD RESULT_ADDR      
+    CMP #0x64           
+    BLO CALC_THOUSANDS   
+
+    SUB #0x64           
+    ST RESULT_ADDR      
+    LD HUNDR
+    INC          
+    ST HUNDR            
+    JUMP CALC_HUNDREDS  
+
+CALC_THOUSANDS:
+    LD HUNDR
+    CMP #0x0A           
+    BLO CALC_TENTHOUSANDS  
+
+    SUB #0x0A           
+    ST HUNDR      
+    LD THOUS
+    INC          
+    ST THOUS             
+    JUMP CALC_THOUSANDS      
+
+CALC_TENTHOUSANDS:
+    LD THOUS
+    CMP #0x0A 
+    BLO CALC_TENS 
+
+    SUB #0x0A    
+    ST THOUS     
+    LD TENTHOUS
+    INC          
+    ST TENTHOUS  
+    JUMP CALC_TENTHOUSANDS 
+
+
+CALC_TENS:
+    LD RESULT_ADDR
+    CMP #0x0A           
+    BLO PRINT_TENTHOUSANDS
+
+    SUB #0x0A           
+    ST RESULT_ADDR      
+    LD TENS
+    INC          
+    ST TENS             
+    JUMP CALC_TENS      
+
+PRINT_TENTHOUSANDS:
+    IN 0x0D             
+    AND #0x40           
+    BEQ PRINT_TENTHOUSANDS
+    LD TENTHOUS
+    ADD #0x30           
+    OUT 0x0C            
+
+
+PRINT_THOUSANDS:
+    IN 0x0D             
+    AND #0x40           
+    BEQ PRINT_THOUSANDS 
+    LD THOUS
+    ADD #0x30           
+    OUT 0x0C            
+
+PRINT_HUNDREDS:
+    IN 0x0D             
+    AND #0x40           
+    BEQ PRINT_HUNDREDS  
+    LD HUNDR
+    ADD #0x30           
+    OUT 0x0C            
+
+PRINT_TENS:
+    IN 0x0D             
+    AND #0x40           
+    BEQ PRINT_TENS      
+    LD TENS
+    ADD #0x30           
+    OUT 0x0C            
+
+PRINT_UNITS:
+    IN 0x0D             
+    AND #0x40           
+    BEQ PRINT_UNITS     
+    LD RESULT_ADDR
+    ADD #0x30           
+    OUT 0x0C            
+    HLT
