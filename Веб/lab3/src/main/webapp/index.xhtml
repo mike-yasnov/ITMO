@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Главная</title>
     <link rel="stylesheet" href="static/style.css"/>
@@ -9,7 +10,7 @@
     <header id="welcomepage-header">
         <h1>Web-programming | lab3 | Var 85303 </h1>
         <div>
-            <a>Яснов Михаил</a>
+            <a>Михаил Яснов</a>
         </div>
     </header>
 
@@ -17,7 +18,11 @@
         <h:commandButton id="openButton" value="Основная страница" action="goToMain" styleClass="custom-button"/>
     </h:form>
 
-    <div id="clock"></div>
+    <div id="clock">
+        <h:outputText id="serverTime" value="#{timeBean.currentTime}" style="display: none;"/>
+        <span id="clientTime"></span>
+    </div>
+
     <script src="index.js"/>
 </h:body>
 </html>

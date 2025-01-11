@@ -1,23 +1,28 @@
-
 import db.PointDAO;
 import db.models.PointModel;
 import org.primefaces.PrimeFaces;
 import utils.Validator;
+import utils.TimeService;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 @ManagedBean(name = "checkPointBean")
 @SessionScoped
 public class CheckPointBean implements Serializable {
-    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    @ManagedProperty("#{timeService}")
+    private TimeService timeService;
+    
     private boolean isHit = false;
     private PointDAO pointService = new PointDAO();
     private ArrayList<PointModel> results = (ArrayList<PointModel>) pointService.findAll();
+
+    public void setTimeService(TimeService timeService) {
+        this.timeService = timeService;
+    }
 
     public ArrayList<PointModel> getResults() {
         return results;
@@ -41,7 +46,7 @@ public class CheckPointBean implements Serializable {
         if (Validator.validateX(pointBean.getX()) && Validator.validateY(pointBean.getY()) && Validator.validateR(pointBean.getR())){
             isHit = hit(pointBean.getX(), pointBean.getY(), pointBean.getR());
             PrimeFaces.current().executeScript("draw(" + pointBean.getX() + "," + pointBean.getY() + "," + pointBean.getR() + "," + isHit + ")");
-            PointModel pointModel = new PointModel(pointBean.getX(), pointBean.getY(), pointBean.getR(), isHit, String.valueOf(System.nanoTime() - startTime), formatter.format(LocalDateTime.now()));
+            PointModel pointModel = new PointModel(pointBean.getX(), pointBean.getY(), pointBean.getR(), isHit, String.valueOf(System.nanoTime() - startTime), timeService.getCurrentTime());
             results.add(pointModel);
             pointService.save(pointModel);
         }

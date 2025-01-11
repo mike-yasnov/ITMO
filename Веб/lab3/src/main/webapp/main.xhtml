@@ -6,6 +6,30 @@
 <h:head>
     <title>Проверка</title>
     <link rel="stylesheet" href="static/main.css"/>
+    <style>
+        .custom-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ff4444;
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+            z-index: 9999;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .custom-toast-header {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+    </style>
 </h:head>
 <h:body>
     <h:form id="myForm" class="container">
@@ -91,7 +115,11 @@
                             <br/>
                             <h:outputLabel for="yInput" value="Введите Y: "/>
                             <br/>
-                            <h:inputText id="yInput" onchange="updateY(this.value)" styleClass="input-field"/>
+                            <h:inputText id="yInput" 
+                                       onchange="updateY(this.value)" 
+                                       onkeypress="return validateYKeyPress(event)"
+                                       maxlength="8"
+                                       styleClass="input-field"/>
                             <br/>
                         </div>
                         <div>
